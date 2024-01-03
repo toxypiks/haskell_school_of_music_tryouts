@@ -27,9 +27,29 @@ my_add_aux x _ = x + 1
 list_length_two :: (Num a) => [a] -> Int
 list_length_two xs = my_fold my_add_aux 0 xs
 
--- Excercise 3.8
--- d) Add "pointwise" the element of a list of pairs.
+-- Excercise 3.8 - caution! I'm using simplification through currying
+-- a) Double each number in a list.
+doubleInt  :: Int -> Int
+doubleInt x = x * 2
 
+doubleEach :: [Int] -> [Int]
+doubleEach = map doubleInt
+
+-- b) Pair each element in a list with that number and one plus that number.
+oneAndOne :: Int -> (Int, Int)
+oneAndOne x = (x, x + 1)
+
+pairAndOne :: [Int] -> [(Int,Int)]
+pairAndOne = map (oneAndOne)
+
+-- c) Add together each pair in a list.
+sumTuple :: (Int, Int) -> Int
+sumTuple (x,y) = x + y
+
+addEachPair :: [(Int, Int)] -> [Int]
+addEachPair = map (sumTuple)
+
+-- d) Add "pointwise" the element of a list of pairs.
 my_add_tuple :: (Int, Int) -> (Int, Int) -> (Int, Int)
 my_add_tuple (x, y) (a, b) = (x + a, y + b)
 
