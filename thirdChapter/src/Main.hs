@@ -101,3 +101,14 @@ make_list x y | x < y = [x .. y]
 
 chrom :: Pitch -> Pitch -> [Music Pitch]
 chrom p1 p2 = map (note qn) $ map pitch $ make_list (absPitch p1) (absPitch p2)
+
+
+-- Exercise 3.15
+
+decrypt :: String -> String
+decrypt [] = []
+decrypt (x:xs) = toEnum((fromEnum x) + 1) : decrypt xs
+
+encrypt :: String -> String
+encrypt [] = []
+encrypt (x:xs) = toEnum((fromEnum x) -1) : encrypt xs
