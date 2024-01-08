@@ -99,9 +99,25 @@ make_list x y | x < y = [x .. y]
               | x > y = reverse_list [y .. x]
               | x == y = [x]
 
+-- without list comprehension
+create_list :: Int -> [Int]
+create_list 0 = []
+create_list length = (0 : create_list(length -1))
+
+increment x = x + 1
+
+count_up :: Int -> [Int] -> [Int]
+count_up x (y:ys) = (x+y :(y:ys))
+-- [x..y]
+-- [0,0,0,0] x -> [x,x+1,x+2,x+3]
+-- foldr -> func [x] [0,0,0,0]
+-- b = [c]
+-- foldr :: (a -> [c] -> [c]) -> [c] -> [a] -> [c]
+
+count_up_list x list = reverse_list $ foldr (count_up) [x] (reverse_list list)
+
 chrom :: Pitch -> Pitch -> [Music Pitch]
 chrom p1 p2 = map (note qn) $ map pitch $ make_list (absPitch p1) (absPitch p2)
-
 
 -- Exercise 3.15
 
