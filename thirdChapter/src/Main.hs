@@ -104,20 +104,45 @@ create_list :: Int -> [Int]
 create_list 0 = []
 create_list length = (0 : create_list(length -1))
 
-increment x = x + 1
+-- Exercise 3.12
 
 count_up :: Int -> [Int] -> [Int]
 count_up x (y:ys) = (x+y :(y:ys))
--- [x..y]
--- [0,0,0,0] x -> [x,x+1,x+2,x+3]
--- foldr -> func [x] [0,0,0,0]
--- b = [c]
--- foldr :: (a -> [c] -> [c]) -> [c] -> [a] -> [c]
 
 count_up_list x list = reverse_list $ foldr (count_up) [x] (reverse_list list)
 
 chrom :: Pitch -> Pitch -> [Music Pitch]
 chrom p1 p2 = map (note qn) $ map pitch $ make_list (absPitch p1) (absPitch p2)
+
+-- Exercise 3.13
+
+data MajorScale = MyIonian | MyDorian | MyPhrygian | MyLydian | MyMixolydian | MyAeolian | MyLocrian deriving Eq
+
+genScale :: MajorScale -> [Music Pitch]
+genScale ms
+  | ms == MyIonian = map (note qn) $ map pitch (count_up_list (absPitch (C,4)) [2,2,1,2,2,2,1])
+  | ms == MyDorian = map (note qn) $ map pitch (count_up_list (absPitch (D,4)) [2,1,2,2,2,1,2])
+  | ms == MyPhrygian = map (note qn) $ map pitch (count_up_list (absPitch (E,4)) [1,2,2,2,1,2,2])
+  | ms == MyLydian = map (note qn) $ map pitch (count_up_list (absPitch (F,4)) [2,2,2,1,2,2,1])
+  | ms == MyMixolydian = map (note qn) $ map pitch (count_up_list (absPitch (G,4)) [2,2,1,2,2,1,2])
+  | ms == MyAeolian = map (note qn) $ map pitch (count_up_list (absPitch (A,4)) [2,1,2,2,1,2,2])
+  | ms == MyLocrian = map (note qn) $ map pitch (count_up_list (absPitch (B,4)) [1,2,2,1,2,2,2])
+
+-- Exercise 3.14
+
+pcToQN :: PitchClass -> Music Pitch
+pcToQN p = note qn (p, 4)
+
+pcToEN :: PitchClass -> Music Pitch
+pcToEN p = note en (p, 4)
+
+are_u_sleeping =
+  let m1 = line (map pcToQN [C,D,E,C])
+      m2 = line (map pcToQN [E,F]) :+: g 4 hn
+      m3 = g 4 qn :+: line (map pcToEN [A,G,F]) :+: line (map pcToQN [E,C])
+      m4 = c 4 qn :+: g 3 qn :+: c 4 hn
+  in [m1,m1,m2,m2, m3, m3, m4, m4]
+
 
 -- Exercise 3.15
 
