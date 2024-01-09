@@ -141,7 +141,7 @@ pcToEN p = note en (p, 4)
 are_u_sleeping =
   let m1 = line (map pcToQN [C,D,E,C])
       m2 = line (map pcToQN [E,F]) :+: g 4 hn
-      m3 = g 4 qn :+: line (map pcToEN [A,G,F]) :+: line (map pcToQN [E,C])
+      m3 = g 4 dqn :+: line (map pcToEN [A,G,F]) :+: line (map pcToQN [E,C])
       m4 = c 4 qn :+: g 3 qn :+: c 4 hn
   in line [m1, m1, m2, m2, m3, m3, m4, m4]
 
