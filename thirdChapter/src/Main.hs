@@ -1,3 +1,5 @@
+module Main where
+
 import Euterpea
 
 -- Excercise 3.7 Rewrite the definition of length non-recursively.
@@ -141,8 +143,7 @@ are_u_sleeping =
       m2 = line (map pcToQN [E,F]) :+: g 4 hn
       m3 = g 4 qn :+: line (map pcToEN [A,G,F]) :+: line (map pcToQN [E,C])
       m4 = c 4 qn :+: g 3 qn :+: c 4 hn
-  in [m1,m1,m2,m2, m3, m3, m4, m4]
-
+  in line [m1, m1, m2, m2, m3, m3, m4, m4]
 
 -- Exercise 3.15
 
@@ -153,3 +154,6 @@ decrypt (x:xs) = toEnum((fromEnum x) + 1) : decrypt xs
 encrypt :: String -> String
 encrypt [] = []
 encrypt (x:xs) = toEnum((fromEnum x) -1) : encrypt xs
+
+main = do
+  play are_u_sleeping
