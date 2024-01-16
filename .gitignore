@@ -1,0 +1,9 @@
+*~
+*yaml.lock
+*CHANGELOG.md
+*.stack-work/
+*.hi
+*.o
+LICENSE
+\#*\#
+.\#*
