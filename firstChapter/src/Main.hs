@@ -4,14 +4,15 @@ import Euterpea
 
 -- Excercise 1.4: Modify the definitions of hNote and hList so that each take an extra argument that specifies the interval of harmonization
 
-hNote     :: Dur -> Pitch -> Int -> Music Pitch
-hNote d p h = note d p :=: note d (trans (-h + p))
+hNote      :: Dur -> Pitch -> Int -> Music Pitch
+hNote d p h = note d p :=: note d (trans (-h) p)
+
+hList           :: Int -> Dur -> [Pitch] -> Music Pitch
+hList h d []     = rest 0
+hList h d (p:ps) = hNote d p h :+: hList h d ps
 
 mel :: Int -> Music Pitch
-mel h = hNote qn (F,4) h :+: hNote qn (A,4) h :+: hNote qn (F,4) h
-
-play_mel :: Music Pitch
-play_mel = mel -3
+mel h = hList h qn [(F,4), (A,4), (F,4)]
 
 -- Exercise 1.
 
@@ -81,5 +82,4 @@ modify_my_notes = f3 my_notes
 
 main :: IO()
 main = do
-  play song
-  play play_mel
+  play (mel 3)
