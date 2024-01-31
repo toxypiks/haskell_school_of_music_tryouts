@@ -24,8 +24,8 @@ pcToEN pc = note en (pc, 4)
 
 pink_panther_voice =
   let m0 = line(map pcToQN [C])
-      m1 = line(map pcToEN [Cs, D, Ds]) :+: e 4 bn
-      m2 = line(map pcToEN [Ds,D,Cs]) :+: c 4 bn
+      m1 = cs 4 en :+: d 4 qn :+: ds 4 en :+: e 4 bn
+      m2 = ds 4 en :+: d 4 qn :+: cs 4 en :+: c 4 bn
   in line [m0,m1,m1,m2,m1]
 
 main = do
