@@ -11,5 +11,22 @@ twinkle =
       m3 = line(map pcToQN [G,G,F,F,E,E]) :+: d 4 hn
   in line [m1,m2,m3,m3,m1,m2]
 
+my_length :: [Int] -> Int
+my_length xs = sum (map (const 1) xs)
+
+my_length_do :: Int
+my_length_do = my_length[2,4,3,2,5,6]
+
+-- Pink Panther theme
+
+pcToEN :: PitchClass -> Music Pitch
+pcToEN pc = note en (pc, 4)
+
+pink_panther_voice =
+  let m0 = line(map pcToQN [C])
+      m1 = line(map pcToEN [Cs, D, Ds]) :+: e 4 bn
+      m2 = line(map pcToEN [Ds,D,Cs]) :+: c 4 bn
+  in line [m0,m1,m1,m2,m1]
+
 main = do
-  play twinkle
+  play pink_panther_voice
