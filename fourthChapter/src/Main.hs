@@ -29,7 +29,7 @@ pink_panther_voice =
       p1 = rest qn :+: rest en :+: gs 3 en
       m3 = a 3 qn :+: rest en :+: b 3 en :+: c 4 qn :+: rest en :+: gs 3 en
       m4 = a 3 en :+: rest en :+: b 3 en :+: c 4 en :+: rest en :+: f 4 en :+: e 4 en :+: a 3 en :+: c 4 en :+: e 4 en
-      m5 = ef 4 qn :+: e 4 en :+: d 4 en :+: c 4 en :+: a 3 en :+: g 3 en :+: a 3 wn
+      m5 = tempo (3/2)(line [ef 4 qn :+: e 4 en :+: d 4 en]) :+: tempo (3/2) (line [c 4 en :+: a 3 en :+: g 3 en]) :+: a 3 wn
   in line [m0,m1,m1,m2,m1,p1,m3,m4,m5]
 
 main = do
