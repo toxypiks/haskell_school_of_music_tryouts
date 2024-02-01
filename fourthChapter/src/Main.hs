@@ -14,13 +14,13 @@ twinkle =
 -- Exercise 4.1 Find a simple piece of music and transcribe it into Euterpea
 -- Pink Panther theme
 
-pcToOC4 :: PitchClass -> Dur -> Music Pitch
-pcToOC4 pc d = note d (pc, 4)
+pcToOC4 :: (PitchClass, Dur) -> Music Pitch
+pcToOC4 (pc, d) = note d (pc, 4)
 
 pink_panther_voice =
-  let m0 = line(map pcToQN [C])
-      m1 = cs 4 en :+: d 4 qn :+: ds 4 en :+: e 4 bn
-      m2 = ds 4 en :+: d 4 qn :+: cs 4 en :+: c 4 bn
+  let m0 = c 4 qn
+      m1 = line(map pcToOC4 [(Cs, en), (D, qn), (Ds, en), (E, bn)])
+      m2 = line(map pcToOC4 [(Ds, en), (D, qn), (Cs, en), (C, bn)])
       p1 = rest qn :+: rest en
       m3 = gs 3 en :+: a 3 qn :+: rest en :+: b 3 en :+: c 4 qn :+: rest en
       m4 = gs 3 en :+: a 3 qn :+: b 3 en :+: c 4 qn :+: f 4 en :+: e 4 qn :+: a 3 en :+: c 4 qn :+: e 4 en :+: ef 4 dhn
@@ -42,7 +42,11 @@ prefix mel = let m1 = line(concat(prefixes mel))
 
 mel1 = [c 5 en,e 5 sn, g 5 en,b 5 sn,a 5 en,f 5 sn,d 5 en,b 4 sn,c 5 en]
 
+mel1_test = prefixes mel1
+
 mel1_pref = prefix mel1
 
+my_mel = prefix [pink_panther_voice]
+
 main = do
-  play mel1_pref
+  play pink_panther_voice
