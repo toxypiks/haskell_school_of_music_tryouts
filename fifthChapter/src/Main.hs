@@ -25,3 +25,12 @@ power f y n = let x = (f y)
               in power f x (n-1)
 
 my_res_pow = power (+2) 5 1
+
+-- Actually returning a function using where together with recursion
+
+power_sec :: (Num a, Eq a) => (a -> a) -> a -> (a -> a)
+power_sec f 0 = f
+power_sec f n = powerF
+               where powerF y = power_sec f y (n-1)
+
+my_res_pow_test = power_sec (+2) 5 1
