@@ -28,9 +28,11 @@ my_res_pow = power (+2) 5 1
 
 -- Actually returning a function using where together with recursion
 
-power_sec :: (Num a, Eq a) => (a -> a) -> a -> (a -> a)
-power_sec f 0 = f
-power_sec f n = powerF
-               where powerF y = power_sec f y (n-1)
+power_secc :: (Num a, Eq a) => (a -> a) -> a -> (a -> a)
+power_secc f n = powerF n
+               where powerF n y | (n == 1) = f y
+                                | otherwise = powerF (n-1) (f y)
 
-my_res_pow_test = power_sec (+2) 5 1
+my_res_pow_fct = power_secc (+2) 5
+
+my_res_pow_ergebnis = my_res_pow_fct 1
